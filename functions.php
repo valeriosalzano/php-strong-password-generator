@@ -18,32 +18,19 @@ function generatePassword($filters)
 
   if($letters || $numbers || $symbols){
     if(!$letters){
-      $filteredArray = preg_filter('/[^a-z]/i','$0',$charsArray);
-      $charsArray = [];
-      foreach ($filteredArray as $value) {
-        $charsArray[] = $value;
-      }
-      
+      $charsArray = preg_filter('/[^a-z]/i','$0',$charsArray);
     }
     if(!$numbers){
-      $filteredArray = preg_filter('/[^0-9]/i','$0',$charsArray);
-      $charsArray = [];
-      foreach ($filteredArray as $value) {
-        $charsArray[] = $value;
-      }
+      $charsArray = preg_filter('/[^0-9]/i','$0',$charsArray);
     }
     if(!$symbols){
-      $filteredArray = preg_filter('/[a-zA-Z0-9]/','$0',$charsArray);
-      $charsArray = [];
-      foreach ($filteredArray as $value) {
-        $charsArray[] = $value;
-      }
+      $charsArray = preg_filter('/[a-zA-Z0-9]/','$0',$charsArray);
     }
   }
 
   $newPwd = '';
   for ($i = 0; $i < $filters['pwdLength']; $i++) {
-    $newPwd .= $charsArray[rand(0, count($charsArray) - 1)];
+    $newPwd .= $charsArray[array_rand($charsArray, 1)];
   }
   return $newPwd;
 }
