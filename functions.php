@@ -18,8 +18,26 @@ function generatePassword($filters)
 
   if($letters || $numbers || $symbols){
     if(!$letters){
-      echo "son passato di qua";
-      $charsArray = array_filter($charsArray, fn($char) => preg_match('/[^a-z][^A-z]/g',$char));
+      $filteredArray = preg_filter('/[^a-z]/i','$0',$charsArray);
+      $charsArray = [];
+      foreach ($filteredArray as $value) {
+        $charsArray[] = $value;
+      }
+      
+    }
+    if(!$numbers){
+      $filteredArray = preg_filter('/[^0-9]/i','$0',$charsArray);
+      $charsArray = [];
+      foreach ($filteredArray as $value) {
+        $charsArray[] = $value;
+      }
+    }
+    if(!$symbols){
+      $filteredArray = preg_filter('/[a-zA-Z0-9]/','$0',$charsArray);
+      $charsArray = [];
+      foreach ($filteredArray as $value) {
+        $charsArray[] = $value;
+      }
     }
   }
 
