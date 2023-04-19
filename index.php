@@ -13,6 +13,18 @@
   Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
   Dare all’utente anche la  possibilità di permettere o meno la ripetizione di caratteri uguali. 
 -->
+<?php
+  $pwdLength = isset($_GET) ? $_GET['pwdLength'] : '';
+
+  function generatePassword($pwdLength)
+  {
+    $newPwd = '';
+    for ($i = 0; $i < $pwdLength; $i++) {
+      $newPwd .= chr(rand(33, 127));
+    }
+    return $newPwd;
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,53 +47,64 @@
 
     <main class="py-5 container">
 
-      <form class="row g-3" action="index.php" method="GET">
+      <div class="text-center container py-3">
+        <?php
+        if (!empty($pwdLength)) {
+          $pwd = generatePassword($pwdLength);
+          echo "Password: $pwd";
+        }
+        ?>
+      </div>
 
-        <div class="row mb-3">
-          <label for="pwdLengthInput" class="col-sm-2 col-lg-6 col-form-label">Lunghezza Password: </label>
-          <div class="col-sm-10 col-lg-6">
-            <input type="number" class="form-control" id="pwdLengthInput" name="pwdLength">
-          </div>
-        </div>
+      <div class="container py-3">
+        <form class="row g-3" action="index.php" method="GET">
 
-        <fieldset class="row mb-3">
-          <legend class="col-form-label col-sm-2 col-lg-6 pt-0">Includi:</legend>
-          <div class="col-sm-10 col-lg-6">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="letters" id="lettersCheck">
-              <label class="form-check-label" for="lettersCheck">
-                Lettere
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="numbers" id="numbersCheck">
-              <label class="form-check-label" for="numbersCheck">
-                Numeri
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="symbols" id="symbolsCheck">
-              <label class="form-check-label" for="symbolsCheck">
-                Simboli
-              </label>
+          <div class="row mb-3">
+            <label for="pwdLengthInput" class="col-sm-2 col-lg-6 col-form-label">Lunghezza Password: </label>
+            <div class="col-sm-10 col-lg-6">
+              <input type="number" class="form-control" id="pwdLengthInput" name="pwdLength">
             </div>
           </div>
-        </fieldset>
 
-        <div class="row mb-3">
-          <div class="col-sm-12 offset-sm-2 offset-lg-6">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="repetitions" id="repetitionsCheck">
-              <label class="form-check-label" for="repetitionsCheck">
-                Includi Ripetizioni
-              </label>
+          <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-2 col-lg-6 pt-0">Includi:</legend>
+            <div class="col-sm-10 col-lg-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="letters" id="lettersCheck">
+                <label class="form-check-label" for="lettersCheck">
+                  Lettere
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="numbers" id="numbersCheck">
+                <label class="form-check-label" for="numbersCheck">
+                  Numeri
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="symbols" id="symbolsCheck">
+                <label class="form-check-label" for="symbolsCheck">
+                  Simboli
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="row mb-3">
+            <div class="col-sm-12 offset-sm-2 offset-lg-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="repetitions" id="repetitionsCheck">
+                <label class="form-check-label" for="repetitionsCheck">
+                  Includi Ripetizioni
+                </label>
+              </div>
             </div>
           </div>
-        </div>
 
-        <button type="submit" class="btn btn-primary">Sign in</button>
+          <button type="submit" class="btn btn-primary">Genera Password</button>
 
-      </form>
+        </form>
+      </div>
 
     </main>
 
