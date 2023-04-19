@@ -1,9 +1,4 @@
-<!-- 
 
-  Milestone 4 (BONUS)
-  Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
-  Dare all’utente anche la  possibilità di permettere o meno la ripetizione di caratteri uguali. 
--->
 <?php
   session_start();
 
@@ -85,7 +80,7 @@
           <div class="row mb-3">
             <div class="col-sm-12 offset-sm-2 offset-lg-6">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="repetitions" id="repetitionsCheck" value="1">
+                <input class="form-check-input" type="checkbox" name="repetitions" id="repetitionsCheck" value="1" checked>
                 <label class="form-check-label" for="repetitionsCheck">
                   Includi Ripetizioni
                 </label>

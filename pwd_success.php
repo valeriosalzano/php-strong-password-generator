@@ -21,9 +21,9 @@ $generatedPwd = $_SESSION['generatedPwd'];
       <h2 class="display-5">La password è stata generata correttamente</h2>
     </header>
 
-    <main class="py-5 container">
-      <div class="alert alert-success" role="alert">
-        <?php echo "Password: $generatedPwd" ?>
+    <main class="py-5 container text-center">
+      <div class="alert alert-success display-5 border-3 border-success" role="alert">
+        <?php echo $generatedPwd ?>
       </div>
 
       <a href="/php-strong-password-generator"> Torna alla Home </a>
