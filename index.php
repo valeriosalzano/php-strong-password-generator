@@ -1,8 +1,5 @@
 <!-- 
 
-  Milestone 3 (BONUS)
-  Invece di visualizzare la password nella index, effettuare un redirect ad una pagina dedicata che tramite $_SESSION recupererà la password da mostrare all’utente.
-
   Milestone 4 (BONUS)
   Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
   Dare all’utente anche la  possibilità di permettere o meno la ripetizione di caratteri uguali. 
@@ -13,8 +10,8 @@
   include_once __DIR__ . "/functions.php";
   $pwdLength = isset($_GET) ? $_GET['pwdLength'] : '';
 
-  if (!empty($pwdLength)) {
-    $generatedPwd = generatePassword($pwdLength);
+  if (!empty($_GET)) {
+    $generatedPwd = generatePassword($_GET);
     $_SESSION['generatedPwd'] = $generatedPwd;
 
     redirectSuccess();
@@ -65,19 +62,19 @@
             <legend class="col-form-label col-sm-2 col-lg-6 pt-0">Includi:</legend>
             <div class="col-sm-10 col-lg-6">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="letters" id="lettersCheck">
+                <input class="form-check-input" type="checkbox" name="letters" id="lettersCheck" value="1">
                 <label class="form-check-label" for="lettersCheck">
                   Lettere
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="numbers" id="numbersCheck">
+                <input class="form-check-input" type="checkbox" name="numbers" id="numbersCheck" value="1">
                 <label class="form-check-label" for="numbersCheck">
                   Numeri
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="symbols" id="symbolsCheck">
+                <input class="form-check-input" type="checkbox" name="symbols" id="symbolsCheck" value="1">
                 <label class="form-check-label" for="symbolsCheck">
                   Simboli
                 </label>
@@ -88,7 +85,7 @@
           <div class="row mb-3">
             <div class="col-sm-12 offset-sm-2 offset-lg-6">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="repetitions" id="repetitionsCheck">
+                <input class="form-check-input" type="checkbox" name="repetitions" id="repetitionsCheck" value="1">
                 <label class="form-check-label" for="repetitionsCheck">
                   Includi Ripetizioni
                 </label>

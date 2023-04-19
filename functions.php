@@ -1,19 +1,36 @@
 <?php
 
-function generatePassword($pwdLength)
+function generatePassword($filters)
 {
-  $newPwd = '';
-  for ($i = 0; $i < $pwdLength; $i++) {
+  // basic chars array
+  $noChars = [34, 39, 60, 62]; //problematic chars
+  $charsArray = [];
+  for ($i = 33; $i < 127; $i++) {
+    if (!array_search($i, $noChars)) {
+      $charsArray[] = chr($i);
+    }
+  }
 
-    do {
-      $number = rand(33, 127);
-    } while ($number == 60 || $number == 62); // no "<" and ">" chars
-    
-    $newPwd .= chr($number);
+  // applying filters
+  $letters = $filters['letters'] ?? false;
+  $numbers = $filters['numbers'] ?? false;
+  $symbols = $filters['symbols'] ?? false;
+
+  if($letters || $numbers || $symbols){
+    if(!$letters){
+      echo "son passato di qua";
+      $charsArray = array_filter($charsArray, fn($char) => preg_match('/[^a-z][^A-z]/g',$char));
+    }
+  }
+
+  $newPwd = '';
+  for ($i = 0; $i < $filters['pwdLength']; $i++) {
+    $newPwd .= $charsArray[rand(0, count($charsArray) - 1)];
   }
   return $newPwd;
 }
 
-function redirectSuccess(){
-  header('Location: http://localhost/php-strong-password-generator/pwd_success.php');
+function redirectSuccess()
+{
+  header('Location: ./pwd_success.php');
 }

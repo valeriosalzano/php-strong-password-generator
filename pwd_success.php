@@ -26,7 +26,7 @@ $generatedPwd = $_SESSION['generatedPwd'];
         <?php echo "Password: $generatedPwd" ?>
       </div>
 
-      <a href="http://localhost/php-strong-password-generator"> Torna alla Home </a>
+      <a href="/php-strong-password-generator"> Torna alla Home </a>
     </main>
 </body>
 
