@@ -1,6 +1,4 @@
 <!-- 
-  Milestone 2
-  Verificato il corretto funzionamento del nostro codice, spostiamo la logica in un file functions.php che includeremo poi nella pagina principale
 
   Milestone 3 (BONUS)
   Invece di visualizzare la password nella index, effettuare un redirect ad una pagina dedicata che tramite $_SESSION recupererà la password da mostrare all’utente.
@@ -10,8 +8,18 @@
   Dare all’utente anche la  possibilità di permettere o meno la ripetizione di caratteri uguali. 
 -->
 <?php
-  include_once __DIR__."/functions.php";
+  session_start();
+
+  include_once __DIR__ . "/functions.php";
   $pwdLength = isset($_GET) ? $_GET['pwdLength'] : '';
+
+  if (!empty($pwdLength)) {
+    $generatedPwd = generatePassword($pwdLength);
+    $_SESSION['generatedPwd'] = $generatedPwd;
+
+    redirectSuccess();
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +45,8 @@
 
       <div class="text-center container py-3">
         <?php
-        if (!empty($pwdLength)) {
-          $pwd = generatePassword($pwdLength);
-          echo "Password: $pwd ";
+        if (isset($generatedPwd)) {
+          echo "Password: $generatedPwd ";
         }
         ?>
       </div>

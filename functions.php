@@ -13,3 +13,7 @@ function generatePassword($pwdLength)
   }
   return $newPwd;
 }
+
+function redirectSuccess(){
+  header('Location: http://localhost/php-strong-password-generator/pwd_success.php');
+}
