@@ -3,7 +3,7 @@
   session_start();
 
   include_once __DIR__ . "/functions.php";
-  $pwdLength = isset($_GET) ? $_GET['pwdLength'] : '';
+  $pwdLength = ( isset($_GET) & !empty($_GET) )? $_GET['pwdLength'] : '';
 
   if (!empty($_GET)) {
     $generatedPwd = generatePassword($_GET);
